@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import 'react-table-v6/react-table.css'
 import axios from 'axios'
 import ReactTable from 'react-table-v6'
+import './app.css'
 
 
 const App = () => {
@@ -34,7 +35,7 @@ const App = () => {
 
 
   useEffect(() => {
-    axios.get('https://randomuser.me/api?results=20')
+    axios.get('https://randomuser.me/api?results=25')
       .then(({ data }) => {        
         let employees = data.results.map(employee => ({
           name: `${employee.name.first} ${employee.name.last}`,
@@ -50,10 +51,16 @@ const App = () => {
   }, [])
 
   return (
+    <>
+    <div className="topBar">
+    <h1>Employee Directory</h1>
+    <small>Click on tabs to filter</small>
+      </div>
     <ReactTable
       data={employeeState.employees}
       columns={employeeState.columns}
     />
+    </>
   )
 }
 
